@@ -1,0 +1,11 @@
+{
+    "books": [
+        { 
+            "id" : "1",
+            "title" : "Book",
+            "img" : "https://images.pexels.com/photos/2099266/pexels-photo-2099266.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+            "category" : "SCI-FI",
+            "description" : "Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua"
+        }
+    ]
+}
