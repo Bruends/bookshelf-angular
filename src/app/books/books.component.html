@@ -1,1 +1,5 @@
-<p>books</p>
+<div *ngFor="let book of books">
+  <img src="{{ book.imgPath  }}" alt="{{ book.title }}">
+  <h2>{{ book.title }}</h2>
+  <p>{{ book.description }}</p>
+</div>

@@ -4,25 +4,20 @@ import { Observable } from 'rxjs';
 import { Book } from 'src/types/Book';
 
 
-// const options = {
-//   headers : new HttpHeaders({
-//     'Content-Type' : 'multipart/form-data; Boundary=',
-//     'Boundary' : ''
-//   })
-// }
-
 @Injectable({
   providedIn: 'root'
 })
 
 export class ApiService {
-
   
-
-  url: string = "http://localhost:3000/imgup";
-
+  url: string = "http://localhost:3000/books";
+  baseUrl: string = "http://localhost:3000/";
 
   constructor(private http: HttpClient) { }
+
+  getAllBooks(): Observable<Book[]> {
+    return this.http.get<Book[]>(this.url);
+  }
 
   postBook(book: Book): Observable<Book> {
 
