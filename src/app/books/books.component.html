@@ -2,4 +2,5 @@
   <img src="{{ book.imgPath  }}" alt="{{ book.title }}">
   <h2>{{ book.title }}</h2>
   <p>{{ book.description }}</p>
+  <a [routerLink]="['/update', book.id]">Editar</a>
 </div>

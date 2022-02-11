@@ -4,5 +4,6 @@ export interface Book {
     img?: File;
     imgPath?: string; 
     category?: string;
+    author?: string;
     description: string;
 }
