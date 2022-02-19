@@ -7,7 +7,7 @@ import { Book } from 'src/types/Book';
   styleUrls: ['./book.component.scss']
 })
 export class BookComponent implements OnInit {
-
+  @Input() book: Book;
 
   constructor() { }
 

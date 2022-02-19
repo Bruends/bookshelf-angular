@@ -1,6 +1,9 @@
-<div *ngFor="let book of books">
-  <img src="{{ book.imgPath  }}" alt="{{ book.title }}">
-  <h2>{{ book.title }}</h2>
-  <p>{{ book.description }}</p>
-  <a [routerLink]="['/update', book.id]">Editar</a>
-</div>
+<section class="container-fluid bg-dark">
+  <div class="row p-4 justify-content-center">    
+    <app-book 
+      *ngFor="let book of books" 
+      [book]="book"
+      class="card mb-3 col-lg-5 col-md-12 mx-sm-auto m-lg-2 rounded p-0"
+      ></app-book>
+  </div>
+</section>
