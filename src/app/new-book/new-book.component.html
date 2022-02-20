@@ -1,5 +1,5 @@
 <div class="container">	
-	<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="p-4 bg-white mx-auto display-block my-4 rounded">
+	<form ngNativeValidate #f="ngForm" (ngSubmit)="onSubmit(f)" class="p-4 bg-white mx-auto display-block my-4 rounded">
 	  <div class="row p-4 justify-content-around">
 
 	  	<!-- form inputs -->
@@ -7,13 +7,13 @@
 	  		<h2 class="mb-4">Novo Livro: </h2>
 	  		<div class="mb-3">
 		    	<label for="title" class="form-label">Título: </label>
-		    	<input #title [(ngModel)]="book.title" type="text" class="form-control" name="title" required>
+		    	<input #title [(ngModel)]="book.title" type="text" class="form-control" name="title" required />
 					{{ addValidateClass(title) }}
 				</div>
 
 				<div class="mb-3">
-					<label for="author" class="form-label" required>Autor: </label>
-					<input #author [(ngModel)]="book.author" type="text" class="form-control" name="author" required>
+					<label for="author" class="form-label">Autor: </label>
+					<input #author [(ngModel)]="book.author" type="text" class="form-control" name="author" required />
 					{{ addValidateClass(author) }}
 				</div>
 

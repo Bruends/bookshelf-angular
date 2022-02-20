@@ -11,7 +11,7 @@ export class NewBookComponent implements OnInit {
 
   book: Book = {
     title: "",
-    category: "none",    
+    author: "",
     description: "",    
   }
 
@@ -20,15 +20,18 @@ export class NewBookComponent implements OnInit {
   constructor(private api: ApiService) { }
 
   onFileChange(event: any) {
-    this.book.img = event.target.files[0];
-
-    // loading the book img preview
-    const reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-    reader.onload = () => {
-      this.imgPreview = reader.result;
+    // only accept images
+    if(event.target.files[0].type.split('/')[0] === "image"){
+      this.book.img = event.target.files[0];
+      
+      // loading the book img preview
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = () => {
+        this.imgPreview = reader.result;
+      }
     }
-
+    
   }
 
   // bootstrap classes for valid or invalid inputs
@@ -51,7 +54,7 @@ export class NewBookComponent implements OnInit {
     console.log(this.book)
     this.api.postBook(this.book)
       .subscribe(data => {
-        console.log(data)        
+        console.log(data)     
       })
   }
 
