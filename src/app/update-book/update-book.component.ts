@@ -41,7 +41,10 @@ export class UpdateBookComponent implements OnInit {
       reader.onload = () => {
         this.imgPreview = reader.result;
       }
-    } 
+    } else {
+      event.target.value = null;
+      this.toast.warning("selecione um arquivo do tipo imagem.", "Alerta: ");
+    }
     
   }
 
