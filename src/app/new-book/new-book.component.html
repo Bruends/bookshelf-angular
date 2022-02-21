@@ -4,21 +4,21 @@
 
 	  	<!-- form inputs -->
 	  	<div class="col-lg-5">
-	  		<h2 class="mb-4">Novo Livro: </h2>
+	  		<h2 class="mb-4">Novo Livro: </h2>				
 	  		<div class="mb-3">
-		    	<label for="title" class="form-label">Título: </label>
+		    	<label for="title" class="form-label">Título: *</label>
 		    	<input #title [(ngModel)]="book.title" type="text" class="form-control" name="title" required />
 					{{ addValidateClass(title) }}
 				</div>
 
 				<div class="mb-3">
-					<label for="author" class="form-label">Autor: </label>
+					<label for="author" class="form-label">Autor: *</label>
 					<input #author [(ngModel)]="book.author" type="text" class="form-control" name="author" required />
 					{{ addValidateClass(author) }}
 				</div>
 
 				<div class="mb-3">
-					<label for="description" class="form-label">Descrição: </label>
+					<label for="description" class="form-label">Descrição: * </label>
 					<textarea #description [(ngModel)]="book.description" class="form-control" name="description" required></textarea>
 					{{ addValidateClass(description) }}
 				</div>
@@ -27,8 +27,11 @@
 					<label for="img" class="form-label">Escolha uma capa: </label>
 					<input #img  (change)="onFileChange($event)" class="form-control" type="file" name="img" accept="image/png, image/jpeg">
 				</div>
-				
-				<button type="submit" class="btn btn-success">Salvar</button>
+				<div class="mb-4">
+					<small class="text-muted">Campos Obrigatórios *</small>
+				</div>
+				<button type="submit" class="btn btn-success m-1">Salvar</button>
+				<a routerLink="/" class="btn btn-danger m-1">Cancelar</a>
 	  	</div>
 
 			<!-- img preview -->
@@ -37,8 +40,7 @@
 					Capa selecionada: 
 				</div>
 				<img [src]="imgPreview" class="card-img-bottom">				
-			</div>
-
-	  </div>
-	</form>	
+			</div>		
+	  </div>	
+	</form>		
 </div>

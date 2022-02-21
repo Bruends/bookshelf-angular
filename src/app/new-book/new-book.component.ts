@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from 'src/types/Book';
 import { ApiService } from '../services/api.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-book',
@@ -17,7 +19,11 @@ export class NewBookComponent implements OnInit {
 
   imgPreview: any;
 
-  constructor(private api: ApiService) { }
+  constructor(
+    private api: ApiService,
+    private toast: ToastrService,
+    private router: Router,
+  ) { }
 
   onFileChange(event: any) {
     // only accept images
@@ -53,9 +59,18 @@ export class NewBookComponent implements OnInit {
   onSubmit(form: any) {
     console.log(this.book)
     this.api.postBook(this.book)
-      .subscribe(data => {
-        console.log(data)     
-      })
+      .subscribe({
+        next: data => {
+          console.log(data);
+          this.toast.success("Livro adicionado com Sucesso!", "Sucesso: ");
+          this.router.navigate(['/']);
+          
+        },
+        error: error => {
+          console.log(error);
+          this.toast.error("Erro ao adicionar Livro.", "Erro: ");
+        }
+    })
   }
 
   ngOnInit(): void {

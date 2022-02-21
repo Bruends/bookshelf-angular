@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, first, map, Observable } from 'rxjs';
 import { Book } from 'src/types/Book';
 
 
@@ -16,38 +16,14 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getAllBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>(this.url);
+    return this.http.get<Book[]>(this.url);      
   }
 
   findBookById(id: number): Observable<Book> {
     return this.http.get<Book>(this.url + '/find/' + id);
   }
 
-  postBook(book: Book): Observable<Book> {
-
-    const formData = new FormData();
-
-    // appending the book attributes
-    if(book.title)
-      formData.append("title", book.title);
-
-    if(book.description)
-      formData.append("description", book.description);
-
-    if(book.category)
-      formData.append("category", book.category);
-    
-    if(book.author)
-      formData.append("author", book.author);
-    
-    if(book.img)
-      formData.append("img", book.img, book.img.name);
-  
-    return this.http.post<Book>(this.url, formData);
-  }
-
-  updateBook(book: Book): Observable<Book> {
-
+  formDataFromBook(book: Book): FormData {
     const formData = new FormData();
 
     // appending the book attributes
@@ -71,7 +47,17 @@ export class ApiService {
     
     if(book.imgPath)
       formData.append("imgPath", book.imgPath);
-      
-    return this.http.put<Book>(this.url, formData);
+
+    return formData;
+  }
+
+  postBook(book: Book): Observable<Book> {
+    const formData = this.formDataFromBook(book);    
+    return this.http.post<Book>(this.url, formData).pipe(first());
+  }
+  
+  updateBook(book: Book): Observable<Book> {   
+    const formData = this.formDataFromBook(book);      
+    return this.http.put<Book>(this.url, formData).pipe(first());
   }
 }

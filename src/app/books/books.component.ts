@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from 'src/types/Book';
 import { ApiService } from '../services/api.service';
+import { BookService } from '../services/book.service';
+
 
 @Component({
   selector: 'app-books',
@@ -10,23 +12,14 @@ import { ApiService } from '../services/api.service';
 export class BooksComponent implements OnInit {
   books: Book[] = [];
 
-  constructor(private api: ApiService) { }
+  constructor(    
+    private bookService: BookService
+  ) { }
 
   ngOnInit(): void {
-    this.api.getAllBooks()    
-      .subscribe(data => {
-        this.books = data.map(book => {
-          if(book.imgPath){
-            book.imgPath = this.api.baseUrl + book.imgPath;
-          } else {
-            book.imgPath = "/assets/placeholder.jpg";
-          }
+    this.bookService.getSubject()
+      .subscribe(data => { this.books = data });
 
-          console.log(book)
-          return book;
-        })
-        console.log(data)
-      })
+    this.bookService.getFromApi();
   }
-
 }
