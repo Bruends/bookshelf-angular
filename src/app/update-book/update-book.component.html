@@ -1,15 +1,46 @@
-<form #f="ngForm" (ngSubmit)="onSubmit(f)">
-  <label for="title"></label>
-  <input type="text" name="title" [(ngModel)]="book.title"/>
-  
-  <label for="category"></label>
-  <input type="text" name="category" [(ngModel)]="book.category"/>
-  
-  <label for="description"></label>
-  <textarea type="text" name="description" [(ngModel)]="book.description"></textarea>
+<div class="container">	
+	<form ngNativeValidate #f="ngForm" (ngSubmit)="onSubmit(f)" class="p-4 bg-white mx-auto display-block my-4 rounded">
+	  <div class="row p-4 justify-content-around">
 
-  <input type="file" name="img" (change)="onFileChange($event)">
-  <button type="submit">Enviar</button>
-</form>
+	  	<!-- form inputs -->
+	  	<div class="col-lg-5">
+	  		<h2 class="mb-4">Editar Livro: </h2>				
+	  		<div class="mb-3">
+		    	<label for="title" class="form-label">Título: *</label>
+		    	<input #title [(ngModel)]="book.title" type="text" class="form-control" name="title" required />
+					{{ addValidateClass(title) }}
+				</div>
 
-<div>{{ this.book.img?.size }}</div>
+				<div class="mb-3">
+					<label for="author" class="form-label">Autor: *</label>
+					<input #author [(ngModel)]="book.author" type="text" class="form-control" name="author" required />
+					{{ addValidateClass(author) }}
+				</div>
+
+				<div class="mb-3">
+					<label for="description" class="form-label">Descrição: * </label>
+					<textarea #description [(ngModel)]="book.description" class="form-control" name="description" required></textarea>
+					{{ addValidateClass(description) }}
+				</div>
+
+				<div class="mb-3">
+					<label for="img" class="form-label">Escolha uma capa: </label>
+					<input #img  (change)="onFileChange($event)" class="form-control" type="file" name="img" accept="image/png, image/jpeg">
+				</div>
+				<div class="mb-4">
+					<small class="text-muted">Campos Obrigatórios *</small>
+				</div>
+				<button type="submit" class="btn btn-warning m-1">Editar</button>
+				<a routerLink="/" class="btn btn-danger m-1">Cancelar</a>
+	  	</div>
+
+			<!-- img preview -->
+			<div class="card col-lg-5 p-4 rounded">
+				<div class="card-body">
+					Capa selecionada: 
+				</div>
+				<img [src]="imgPreview" class="card-img-bottom">				
+			</div>		
+	  </div>	
+	</form>		
+</div>

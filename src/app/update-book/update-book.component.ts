@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Book } from 'src/types/Book';
 import { ApiService } from '../services/api.service';
 
@@ -9,6 +10,8 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./update-book.component.scss']
 })
 export class UpdateBookComponent implements OnInit {
+  
+  imgPreview: any;
 
   book: Book = {
     id: undefined,
@@ -19,32 +22,75 @@ export class UpdateBookComponent implements OnInit {
     imgPath: "", 
   }
 
-  constructor(private api: ApiService, private route: ActivatedRoute, private router: Router) { }
+
+    constructor(
+    private api: ApiService,
+    private toast: ToastrService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   onFileChange(event: any) {
-    this.book.img = event.target.files[0];
+    // only accept images
+    if(event.target.files[0].type.split('/')[0] === "image"){
+      this.book.img = event.target.files[0];
+      
+      // loading the book img preview
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = () => {
+        this.imgPreview = reader.result;
+      }
+    } 
+    
+  }
+
+  // bootstrap classes for valid or invalid inputs
+  addValidateClass(input: any) :void {
+    if (input.className.includes('ng-touched')) {      
+      if (input.className.includes('ng-invalid')){
+        input.classList.remove('is-valid')
+        input.classList.add("is-invalid") 
+
+      }
+      
+      if (input.className.includes('ng-valid')){
+        input.classList.remove('is-invalid')
+        input.classList.add("is-valid")
+      }
+    }
   }
 
   onSubmit(form: any) {
     console.log(this.book)
     this.api.updateBook(this.book)
-      .subscribe(data => {
-        console.log(data)        
-      })
+      .subscribe({
+        next: data => {
+          console.log(data);
+          this.toast.success("Livro editado com Sucesso!", "Sucesso: ");
+          this.router.navigate(['/']);
+          
+        },
+        error: error => {
+          console.log(error);
+          this.toast.error("Erro ao editar Livro.", "Erro: ");
+        }
+    })
   }
 
   ngOnInit(): void {
-    const paramSubscribe = this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       const id = params["id"];
 
       if(!id)  
         this.router.navigate(['']);
 
-      const findSubscribe = this.api.findBookById(id)
+      this.api.findBookById(id)
         .subscribe(book => {
           if(book)
             this.book = book;
-            console.log(book)            
+            this.imgPreview = this.api.baseUrl + book.imgPath;
+            console.log(this.imgPreview)            
         })
     })
   }
