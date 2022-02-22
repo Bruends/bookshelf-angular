@@ -13,7 +13,7 @@
           <a class="nav-link" routerLink="/new" routerLinkActive="active">Novo Livro</a>
         </li>
       </ul>
-      <form class="d-flex">
+      <form *ngIf="isSearchBarVisible" class="d-flex">
         <input #search (keyup)="searchByTitle(search.value)" class="form-control me-2 rounded" type="search" placeholder="Search" aria-label="Search">
         
       </form>

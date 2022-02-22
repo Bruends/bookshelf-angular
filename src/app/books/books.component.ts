@@ -3,6 +3,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Book } from 'src/types/Book';
 import { ApiService } from '../services/api.service';
 import { BookService } from '../services/book.service';
+import { UiService } from '../services/ui.service';
 
 
 @Component({
@@ -17,8 +18,8 @@ export class BooksComponent implements OnInit {
 
   constructor(    
     private bookService: BookService,
-    private modalService: BsModalService,
-    private apiService: ApiService
+    private modalService: BsModalService,    
+    private uiService: UiService,
   ) { }
 
   ngOnInit(): void {
@@ -26,6 +27,12 @@ export class BooksComponent implements OnInit {
       .subscribe(data => { this.books = data });
 
     this.bookService.getAllFromApi();
+
+    this.uiService.showSearchBar(true);
+  }
+
+  ngOnDestroy(): void {
+    this.uiService.showSearchBar(false);
   }
 
   deleteBook(book: Book, modalTemplate: TemplateRef<any>): void {
