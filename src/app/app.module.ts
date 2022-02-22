@@ -5,8 +5,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { CollapseModule } from 'ngx-bootstrap/collapse'; 
 import { AlertModule } from 'ngx-bootstrap/alert'; 
-
 import { AppRoutingModule } from './app-routing.module';
+import { ModalModule } from 'ngx-bootstrap/modal';
+
 import { AppComponent } from './app.component';
 import { BooksComponent } from './books/books.component';
 import { NewBookComponent } from './new-book/new-book.component';
@@ -34,6 +35,7 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     CollapseModule.forRoot(),
     AlertModule,
+    ModalModule.forRoot(),
     
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',

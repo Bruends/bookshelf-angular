@@ -33,8 +33,7 @@ export class BookService {
     }
   }
 
-  getFromApi(): void {  
-    
+  getAllFromApi(): void {
     this.api.getAllBooks()
       .subscribe({        
         next: (data) => {
@@ -45,13 +44,28 @@ export class BookService {
 
             return book;
           })
-
+          // adding books to subject
           this.booksSubject.next(this.books);
         },
         
         error: (error) => {
           console.log(error);
           this.toast.error('Erro ao buscar livros, tente novamente mais tarde.', 'Erro:');
+        }
+      })
+  }
+
+  deleteFromApi(book: Book){
+    if(book.id)
+    this.api.deleteBook(book.id)
+      .subscribe({
+        next: data => {
+          this.toast.success("Livro deletado com sucesso!", "Sucesso: ")
+          this.getAllFromApi();
+        },
+        error: error => {
+          console.log(error)
+          this.toast.error('Erro ao deletar, tente novamente mais tarde.', 'Erro:');
         }
       })
   }

@@ -16,8 +16,10 @@
       <!-- edit/delete buttons -->
       <div class="text-center">
         <a [routerLink]="['/update/' + book.id]" class="btn btn-warning m-1">Editar</a>
-        <a [routerLink]="['/delete/' + book.id]" class="btn btn-danger m-1">Deletar</a>
+        <button type="button" class="btn btn-danger" (click)="onDelete(book)">Deletar</button>
       </div>
     </div>
   </div>
 </div>
+
+

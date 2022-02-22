@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Book } from 'src/types/Book';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-book',
@@ -8,10 +9,14 @@ import { Book } from 'src/types/Book';
 })
 export class BookComponent implements OnInit {
   @Input() book: Book;
+  @Output() deleteEvent = new EventEmitter();
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
+  onDelete(book: Book): void {
+    this.deleteEvent.emit(book);
+  } 
+  
 }

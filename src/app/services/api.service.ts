@@ -20,7 +20,21 @@ export class ApiService {
   }
 
   findBookById(id: number): Observable<Book> {
-    return this.http.get<Book>(this.url + '/find/' + id);
+    return this.http.get<Book>(this.url + '/find/' + id).pipe(first());
+  }
+
+  deleteBook(id: number): Observable<Book> {
+    return this.http.delete<Book>(this.url + '/' + id).pipe(first());
+  }
+
+  postBook(book: Book): Observable<Book> {
+    const formData = this.formDataFromBook(book);    
+    return this.http.post<Book>(this.url, formData).pipe(first());
+  }
+  
+  updateBook(book: Book): Observable<Book> {   
+    const formData = this.formDataFromBook(book);      
+    return this.http.put<Book>(this.url, formData).pipe(first());
   }
 
   formDataFromBook(book: Book): FormData {
@@ -49,15 +63,5 @@ export class ApiService {
       formData.append("imgPath", book.imgPath);
 
     return formData;
-  }
-
-  postBook(book: Book): Observable<Book> {
-    const formData = this.formDataFromBook(book);    
-    return this.http.post<Book>(this.url, formData).pipe(first());
-  }
-  
-  updateBook(book: Book): Observable<Book> {   
-    const formData = this.formDataFromBook(book);      
-    return this.http.put<Book>(this.url, formData).pipe(first());
   }
 }
