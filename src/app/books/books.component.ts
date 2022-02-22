@@ -1,7 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Book } from 'src/types/Book';
-import { ApiService } from '../services/api.service';
 import { BookService } from '../services/book.service';
 import { UiService } from '../services/ui.service';
 
@@ -35,18 +34,19 @@ export class BooksComponent implements OnInit {
     this.uiService.showSearchBar(false);
   }
 
+  // delete modal functions
   deleteBook(book: Book, modalTemplate: TemplateRef<any>): void {
     this.bookToDelete = book;
     this.modalRef = this.modalService.show(modalTemplate, { class: 'modal-sm' });
   }
 
-  confirm(): void {
+  confirmDelete(): void {
     this.bookService.deleteFromApi(this.bookToDelete);
 
     this.modalRef?.hide();
   }
  
-  decline(): void {
+  declineDelete(): void {
     this.modalRef?.hide();
   }
 }

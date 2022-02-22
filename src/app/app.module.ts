@@ -16,6 +16,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { BookComponent } from './components/book/book.component';
 import { ToastrModule } from 'ngx-toastr';
+import { EmptyBookshelfComponent } from './components/empty-bookshelf/empty-bookshelf.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ToastrModule } from 'ngx-toastr';
     UpdateBookComponent,
     HeaderComponent,
     FooterComponent,
-    BookComponent
+    BookComponent,
+    EmptyBookshelfComponent
   ],
   imports: [
     BrowserModule,

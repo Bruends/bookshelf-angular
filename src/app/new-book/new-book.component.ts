@@ -25,6 +25,9 @@ export class NewBookComponent implements OnInit {
     private router: Router,
   ) { }
 
+  ngOnInit(): void {
+  }
+
   onFileChange(event: any) {
     // only accept images
     if(event.target.files[0].type.split('/')[0] === "image"){
@@ -76,7 +79,6 @@ export class NewBookComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-  }
+  
 
 }
