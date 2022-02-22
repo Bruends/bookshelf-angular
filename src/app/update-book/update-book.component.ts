@@ -22,13 +22,34 @@ export class UpdateBookComponent implements OnInit {
     imgPath: "", 
   }
 
-
-    constructor(
+  constructor(
     private api: ApiService,
     private toast: ToastrService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
+
+  ngOnInit(): void {
+    // 
+    this.route.params.subscribe(params => {
+      const id = params["id"];
+
+      if(!id)  
+        this.router.navigate(['']);
+
+      this.api.findBookById(id)
+        .subscribe(book => {
+          if(book){
+            this.book = book;
+            this.imgPreview = this.api.baseUrl + book.imgPath;          
+
+          } else {
+            this.toast.warning("Livro não encontrado!", "Erro");
+            this.router.navigate(['']);
+          }
+        });
+    });
+  }
 
   onFileChange(event: any) {
     // only accept images
@@ -52,14 +73,14 @@ export class UpdateBookComponent implements OnInit {
   addValidateClass(input: any) :void {
     if (input.className.includes('ng-touched')) {      
       if (input.className.includes('ng-invalid')){
-        input.classList.remove('is-valid')
-        input.classList.add("is-invalid") 
+        input.classList.remove('is-valid');
+        input.classList.add("is-invalid");
 
       }
       
       if (input.className.includes('ng-valid')){
-        input.classList.remove('is-invalid')
-        input.classList.add("is-valid")
+        input.classList.remove('is-invalid');
+        input.classList.add("is-valid");
       }
     }
   }
@@ -78,23 +99,6 @@ export class UpdateBookComponent implements OnInit {
           console.log(error);
           this.toast.error("Erro ao editar Livro.", "Erro: ");
         }
-    })
-  }
-
-  ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      const id = params["id"];
-
-      if(!id)  
-        this.router.navigate(['']);
-
-      this.api.findBookById(id)
-        .subscribe(book => {
-          if(book)
-            this.book = book;
-            this.imgPreview = this.api.baseUrl + book.imgPath;
-            console.log(this.imgPreview)            
-        })
     })
   }
 }
