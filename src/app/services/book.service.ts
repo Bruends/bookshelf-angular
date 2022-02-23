@@ -39,8 +39,11 @@ export class BookService {
         next: (data) => {
           this.books = data.map(book => {
             // adding api url to img path
-            if(book.imgPath)
+            if(book.imgPath){
               book.imgPath = this.api.baseUrl + book.imgPath;
+            } else {
+              book.imgPath = '/assets/placeholder.jpg';
+            }
 
             return book;
           })

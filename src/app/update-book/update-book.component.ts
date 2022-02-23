@@ -29,8 +29,7 @@ export class UpdateBookComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
-  ngOnInit(): void {
-    // 
+  ngOnInit(): void {    
     this.route.params.subscribe(params => {
       const id = params["id"];
 
@@ -41,7 +40,9 @@ export class UpdateBookComponent implements OnInit {
         .subscribe(book => {
           if(book){
             this.book = book;
-            this.imgPreview = this.api.baseUrl + book.imgPath;          
+          
+          if(book.imgPath)
+              this.imgPreview = this.api.baseUrl + book.imgPath;          
 
           } else {
             this.toast.warning("Livro não encontrado!", "Erro");

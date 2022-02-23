@@ -1,6 +1,15 @@
+.card-container {
+    height: 100%;
+}
+
 .cover {
     width: 200px;
     height: 280px;
     object-fit: cover;
     display: block;
+}
+
+.book-description {
+    max-height: 12rem;
+    overflow-y: auto;
 }
