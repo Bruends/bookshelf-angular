@@ -1,27 +1,45 @@
-# Bookshelf
+# Ghibli App Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.3.
+A Simple CRUD App with image upload.
 
-## Development server
+## Demo:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+![Booskshelf demo gif](gif/preview.gif)
 
-## Code scaffolding
+## Techs
+- Angular
+- Bootstrap and Ngx-bootstrap
+- Toastr
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Features
+- CRUD operations
+- Support for Images
+- Reactive Search
+- responsive design with bootstrap
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Install
+First Install and run the bookshelf API [here](https://github.com/BrunoMendes41/BookshelfApi)
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Then clone the repo: 
+```bash
+git clone  https://github.com/BrunoMendes41/BookshelfAngular.git
+```
 
-## Running end-to-end tests
+Install the Dependencies:
+```bash
+npm install
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Running 
+Use the command to run the app:
 
-## Further help
+```bash
+ng serve
+```
+the app will run on `localhost:4200`.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Licence
+[MIT](https://choosealicense.com/licenses/mit/)
