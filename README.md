@@ -1,4 +1,4 @@
-# Ghibli App Angular
+# Bookshelf Angular
 
 A Simple CRUD App with image upload.
 
