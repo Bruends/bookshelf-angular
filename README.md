@@ -32,6 +32,10 @@ Install the Dependencies:
 npm install
 ```
 
+## config 
+
+the api url is set to `localhost:3000` by default but you can change it in `src/environments/environment.ts` (dev) and `src/environments/environment.prod.ts` (production)
+
 ## Running 
 Use the command to run the app:
 
